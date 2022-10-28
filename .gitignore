@@ -1,0 +1,5 @@
+﻿.vs
+.idea
+ProductService/obj
+MemberService/bin
+MemberService/obj
