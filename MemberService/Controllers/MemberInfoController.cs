@@ -16,11 +16,45 @@ public class MemberInfoController : ControllerBase
         Logger = logger;
     }
 
-    [HttpGet("Id/{id}", Name = "GetMemberInfo")]
+    [HttpGet("Id/{id}", Name = "GetInfo")]
     public ActionResult<MemberInfo> Get(int id)
     {
         Logger.Log(LogLevel.Information, "my own log");
         return MemberInfoRepository.Get(id);
     }
-    
+
+    [HttpPost("Name/{name}", Name = "Insert")]
+    public ActionResult<int> Insert(string name)
+    {
+        MemberInfoRepository.Insert(name);
+        return NoContent();
+    }
+
+    [HttpDelete("Id/{id}", Name = "Delete")]
+    public ActionResult Delete(int id)
+    {
+        MemberInfoRepository.Delete(id);
+        return NoContent();
+    }
+
+    [HttpGet("CatchedException")]
+    public ActionResult CatchedException()
+    {
+        try
+        {
+            MemberInfoRepository.ThrowsKeyNotFound();
+            return NoContent();
+        }
+        catch (KeyNotFoundException e)
+        {
+            return StatusCode(500, e.Message);
+        }
+    }
+
+    [HttpGet("NotHandledException")]
+    public ActionResult NotHandledException()
+    {
+        MemberInfoRepository.ThrowsKeyNotFound();
+        return NoContent();
+    }
 }

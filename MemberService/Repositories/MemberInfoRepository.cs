@@ -8,6 +8,7 @@ public interface IMemberInfoRepository
     MemberInfo Get(int id);
     void Insert(string name);
     void Delete(int id);
+    void ThrowsKeyNotFound();
 }
 
 public class MemberInfoRepository : IMemberInfoRepository
@@ -48,5 +49,10 @@ public class MemberInfoRepository : IMemberInfoRepository
     public void Delete(int id)
     {
         MemberInfos.Remove(id);
+    }
+
+    public void ThrowsKeyNotFound()
+    {
+        throw new KeyNotFoundException("Member Not Found");
     }
 }
