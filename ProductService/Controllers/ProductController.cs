@@ -18,7 +18,6 @@ public class ProductController : ControllerBase
     [HttpGet("Id/{id}", Name = "GetInfo")]
     public ActionResult<ProductInfo> Get(int id)
     {
-        Logger.Log(LogLevel.Information, "my own log");
         return ProductInfoRepository.Get(id);
     }
 
